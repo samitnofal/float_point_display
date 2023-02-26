@@ -98,11 +98,11 @@ char * read_input_stub_invalid() {
 void test_get_float_point_number() {
   float output_val = 0;
   for (idx = 0; idx < 5; idx++) {
-    assert(get_float_point_number( & output_val, read_input_stub_valid) == SUCCESS);
+    assert(get_float_point_number( &output_val, read_input_stub_valid) == SUCCESS);
     assert(SIMUTLATED_VALID_FLOAT[idx] == output_val);
   }
   for (idx = 0; idx < 5; idx++) {
-    assert(get_float_point_number( & output_val, read_input_stub_invalid) == ERROR);
+    assert(get_float_point_number( &output_val, read_input_stub_invalid) == ERROR);
   }
 }
 
@@ -148,20 +148,15 @@ void test_print_header() {
 */
 int main() {
   void( * test_func_p[NUMBER_OF_TESTS])() = {
-    &
-    test_validate_input_string,
-    &
-    test_validate_num_within_range,
-    &
-    test_get_float_point_number,
-    &
-    test_print_float_bits,
-    &
-    test_print_header,
+    &test_validate_input_string,
+    &test_validate_num_within_range,
+    &test_get_float_point_number,
+    &test_print_float_bits,
+    &test_print_header,
   };
 
   for (int i = 0; i < NUMBER_OF_TESTS; i++) {
-    ( * test_func_p[i])();
+    ( *test_func_p[i])();
     printf("Successfully executed test case number: %d\n", i);
   }
 

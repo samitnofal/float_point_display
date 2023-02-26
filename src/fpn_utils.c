@@ -13,7 +13,7 @@
     Input:
         char*
     Output:
-        error code
+        int (error code)
 */
 int validate_input_string(char * input) {
   unsigned long i = 0;
@@ -33,7 +33,7 @@ int validate_input_string(char * input) {
     Input:
         char*
     Output:
-        error code
+        int (error code)
 */
 int validate_num_within_range(float num) {
 
@@ -64,7 +64,7 @@ char * read_input() {
     Input:
         float*
     Output:
-        error code
+        int (error code)
 */
 int get_float_point_number(float * num, func_input_reader_def) {
 
@@ -84,7 +84,6 @@ int get_float_point_number(float * num, func_input_reader_def) {
   if (validate_input_string(input) == ERROR) {
     err_code = ERROR;
     goto cleanup_and_return;
-
   };
 
   value = strtof(input, & end_pointer);
@@ -102,7 +101,7 @@ int get_float_point_number(float * num, func_input_reader_def) {
   }
 
   if (err_code == SUCCESS) {
-    * num = value;
+    *num = value;
   }
 
   cleanup_and_return:
