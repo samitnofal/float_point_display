@@ -6,6 +6,10 @@
  */
 #include "fpn_utils.h"
 
+void print_error_message (char* message) {
+    fprintf(stderr,"%s", message);
+}
+
 /*
     validate_input_string
     Helper function to validate input entered by user
@@ -19,7 +23,7 @@ int validate_input_string(char * input) {
   unsigned long i = 0;
   for (i = 0; i < strlen(input); i++) {
     if (!isdigit(input[i]) && input[i] != '.' && input[i] != '-' && input[i] != '+') {
-      printf("Error: Invalid character found in input\n");
+      print_error_message("Error: Invalid character found in input\n");
       return ERROR;
     }
   }
@@ -38,7 +42,7 @@ int validate_input_string(char * input) {
 int validate_num_within_range(float num) {
 
   if (num == HUGE_VALF || num == -HUGE_VALF) {
-    printf("Error: Value out of range for float\n");
+    print_error_message("Error: Value out of range for float\n");
     return ERROR;
   }
   return SUCCESS;
@@ -47,9 +51,9 @@ int validate_num_within_range(float num) {
 char * read_input() {
   char * buffer = NULL;
   size_t len = 0;
-  ssize_t nread = getline( & buffer, & len, stdin);
+  ssize_t nread = getline( &buffer, &len, stdin);
   if (nread == -1) {
-    perror("getline failed to read input");
+    print_error_message("getline failed to read input");
     exit(EXIT_FAILURE);
   }
   // Remove newline character at the end of the line
@@ -66,17 +70,17 @@ char * read_input() {
     Output:
         int (error code)
 */
-int get_float_point_number(float * num, func_input_reader_def) {
+int get_float_point_number(float *num, func_input_reader_def) {
 
-  char * end_pointer = NULL;
+  char *end_pointer = NULL;
   float value = 0;
-  char * input = NULL;
+  char *input = NULL;
   int err_code = SUCCESS;
   printf("Enter a 32-bit floating point number: ");
   input = func_input_reader();
 
   if (strspn(input, " \t\n") == strlen(input)) {
-    perror("Error: Input is empty\n");
+    print_error_message("Error: Input is empty\n");
     err_code = ERROR;
     goto cleanup_and_return;
   }
@@ -86,10 +90,10 @@ int get_float_point_number(float * num, func_input_reader_def) {
     goto cleanup_and_return;
   };
 
-  value = strtof(input, & end_pointer);
+  value = strtof(input, &end_pointer);
 
-  if ( * end_pointer != '\0') {
-    perror("Error: Invalid input value\n");
+  if ( *end_pointer != '\0') {
+    print_error_message("Error: Invalid input value\n");
     err_code = ERROR;
     goto cleanup_and_return;
 
@@ -104,8 +108,10 @@ int get_float_point_number(float * num, func_input_reader_def) {
     *num = value;
   }
 
-  cleanup_and_return:
-    free(input);
+cleanup_and_return:
+    if (input) {
+      free(input);
+    }
     return err_code;
 }
 
