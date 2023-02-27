@@ -27,10 +27,10 @@ main: $(MAIN)
 test: $(TEST)
 
 $(MAIN): $(MAIN_OBJ)
-	$(CC) $^ $(LDFLAGS) -o $@ $(INCLUDES)
+	$(CC)  $^ $(INCLUDES) $(LDFLAGS) -o $@ 
 
 $(TEST): $(TEST_OBJ)
-	$(CC) $^ $(LDFLAGS) -o $@ $(INCLUDES)
+	$(CC) $^ $(INCLUDES) $(LDFLAGS) -o $@ 
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c 
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
