@@ -6,7 +6,18 @@
  */
 #include "fpn_utils.h"
 
-void print_error_message(char *message) { fprintf(stderr, "%s", message); }
+/* 
+    Print error message on stderr
+
+    Input:
+        char* 
+    Output:
+        None
+*/
+void print_error_message(char *message) 
+{ 
+    fprintf(stderr, "%s", message); 
+}
 
 /*
     validate_input_string
@@ -62,6 +73,7 @@ char *read_input()
         print_error_message("getline failed to read input");
         exit(EXIT_FAILURE);
     }
+    
     // Remove newline character at the end of the line
     buffer[strcspn(buffer, "\n")] = '\0';
     return buffer;
