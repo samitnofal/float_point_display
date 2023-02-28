@@ -117,6 +117,7 @@ void test_print_float_bits()
     }
     stdout = mem_stream;
     print_float_bits(15.32);
+    fflush(stdout);
     stdout = fdopen(1, "w");
     assert(strstr(buffer, "0 10000010 11101010001111010111000") != NULL);
 }
@@ -136,6 +137,7 @@ void test_print_header()
     }
     stdout = mem_stream;
     print_header();
+    fflush(stdout);
     stdout = fdopen(1, "w");
     assert(strstr(buffer, "Sign Exponent Mantissa") != NULL);
 }
