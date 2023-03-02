@@ -4,9 +4,10 @@ The following application would accept a floating point number be able to print 
 
 Example:
 Enter the floating point number: 15.23
+```
 Sign Exponent Mantissa
    0 10000010 11100111010111000010100
-
+```
 Two binaries are generated fpn_main and fpn_test. 
 
 Test is for testing the functions and ensure the program is working as expected while the main is the main application.
